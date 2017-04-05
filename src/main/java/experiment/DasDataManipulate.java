@@ -24,10 +24,12 @@ public class DasDataManipulate {
     WebTarget webTargetSc;
 
     public DasDataManipulate() {
+        System.out.println(DasDataManipulate.class.getClassLoader().getResource("security/client-truststore.jks"));
+
         sslConfig = SslConfigurator.newInstance()
-                .trustStoreFile("client-truststore.jks")
+                .trustStoreFile(DasDataManipulate.class.getClassLoader().getResource("security/client-truststore.jks").getPath())
                 .trustStorePassword("wso2carbon")
-                .keyStoreFile("wso2carbon.jks")
+                .keyStoreFile(DasDataManipulate.class.getClassLoader().getResource("security/wso2carbon.jks").getPath())
                 .keyPassword("wso2carbon");
         sslContext = sslConfig.createSSLContext();
         //HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic("Basic", "YWRtaW46YWRtaW4=");
