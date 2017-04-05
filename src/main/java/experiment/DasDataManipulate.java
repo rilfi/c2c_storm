@@ -13,6 +13,8 @@ import javax.ws.rs.client.Entity;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.io.File;
+
 public class DasDataManipulate {
     WebTarget webTargetCount;
     SslConfigurator sslConfig ;
@@ -25,11 +27,17 @@ public class DasDataManipulate {
 
     public DasDataManipulate() {
        System.out.println(DasDataManipulate.class.getClassLoader().getResource("security/wso2carbon.jks").getFile());
+         File securityFile=new File("resource"+File.separator+"security");
+        System.out.println(securityFile.getAbsolutePath());
+         String RESOURCE_BASE_DIRECTORY = "c2c_storm" + File.separator + "src" + File.separator +
+                "main" + File.separator + "resources" + File.separator;
+        System.out.println(RESOURCE_BASE_DIRECTORY);
+
 
         sslConfig = SslConfigurator.newInstance()
-                .trustStoreFile(DasDataManipulate.class.getClassLoader().getResource("security/client-truststore.jks").getFile())
+                .trustStoreFile("client-truststore.jks")
                 .trustStorePassword("wso2carbon")
-                .keyStoreFile(DasDataManipulate.class.getClassLoader().getResource("security/wso2carbon.jks").getFile())
+                .keyStoreFile("wso2carbon.jks")
                 .keyPassword("wso2carbon");
         sslContext = sslConfig.createSSLContext();
         //HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic("Basic", "YWRtaW46YWRtaW4=");
