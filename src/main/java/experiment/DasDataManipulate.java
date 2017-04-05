@@ -24,7 +24,7 @@ public class DasDataManipulate {
     WebTarget webTargetSc;
 
     public DasDataManipulate() {
-        System.out.println(DasDataManipulate.class.getClassLoader().getResource("security/client-truststore.jks"));
+        System.out.println(DasDataManipulate.class.getClassLoader().getResource("security/wso2carbon.jks"));
 
         sslConfig = SslConfigurator.newInstance()
                 .trustStoreFile(DasDataManipulate.class.getClassLoader().getResource("security/client-truststore.jks").getPath())
