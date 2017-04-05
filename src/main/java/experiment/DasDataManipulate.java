@@ -55,6 +55,15 @@ public class DasDataManipulate {
         return response.readEntity(String.class);
 
     }*/
+
+      public  String getRealtedRecordes(String brand,int relatedCount){
+
+          String payload = "{\"tableName\":\"TES\",\"query\":\"idd:one\"}";
+          Response response = webTarget.request(MediaType.APPLICATION_JSON_TYPE).post(Entity.json(payload));
+          return response.readEntity(String.class);
+
+      }
+
     public  String getRealted(){
 
        // String payload = "{\"tableName\":\"TES\",\"query\":\"idd:"+brand+"\",\"start\":0,\"count\":"+relatedCount+"}";
@@ -78,6 +87,7 @@ public class DasDataManipulate {
         DasDataManipulate dasDataManipulate=new DasDataManipulate();
         String countstr = dasDataManipulate.getRealted();
         System.out.println(countstr);
+        System.out.println(dasDataManipulate.getRealted());
 
        /* int relatedCount = 0;
         try {
