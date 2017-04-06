@@ -35,9 +35,9 @@ public class DasDataManipulate {
 
 
         sslConfig = SslConfigurator.newInstance()
-                .trustStoreFile("client-truststore.jks")
+                .trustStoreFile("security"+ File.separator+"client-truststore.jks")
                 .trustStorePassword("wso2carbon")
-                .keyStoreFile("wso2carbon.jks")
+                .keyStoreFile("security"+ File.separator+"wso2carbon.jks")
                 .keyPassword("wso2carbon");
         sslContext = sslConfig.createSSLContext();
         //HttpAuthenticationFeature feature = HttpAuthenticationFeature.basic("Basic", "YWRtaW46YWRtaW4=");
