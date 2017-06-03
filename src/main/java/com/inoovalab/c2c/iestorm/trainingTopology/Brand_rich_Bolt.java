@@ -58,7 +58,7 @@ public class Brand_rich_Bolt extends BaseRichBolt {
         }
 
 
-        _collector.emit( new Values(row,tokens,otokens,ro,rangeMap));
+        _collector.emit( tuple,new Values(row,tokens,otokens,ro,rangeMap));
 
 
 

@@ -13,6 +13,7 @@ import org.apache.storm.utils.Utils;
 
 import java.io.*;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by rilfi on 3/19/2017.
@@ -24,12 +25,14 @@ public class File_rich_Spout extends BaseRichSpout {
     FileInputStream fis;
     InputStreamReader isr;
     BufferedReader br;
+    private AtomicLong linesRead;
 
 
     @Override
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
         outputCollector = spoutOutputCollector;
        // String titleFile= (String)  map.get("fileName");
+        linesRead = new AtomicLong(0);
         try {
             fis = new FileInputStream("/root/c2c/c2c_storm/c3TitleSet.txt");
         } catch (FileNotFoundException e) {
@@ -46,7 +49,8 @@ public class File_rich_Spout extends BaseRichSpout {
         String row = null;
         try {
             if ((row = br.readLine()) != null) {
-                outputCollector.emit(new Values(row));
+                long id = linesRead.incrementAndGet();
+                outputCollector.emit(new Values(row),id);
                 Utils.sleep(1);
 
 

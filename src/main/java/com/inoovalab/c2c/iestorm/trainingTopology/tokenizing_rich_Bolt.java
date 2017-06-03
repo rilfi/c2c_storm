@@ -36,7 +36,7 @@ public class tokenizing_rich_Bolt extends BaseRichBolt {
         String rowLower = row.toLowerCase();
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(rowLower.split(" ")));
         ArrayList<String> otokens = new ArrayList<>(Arrays.asList(rowLower.split(" ")));
-        _collector.emit(new Values(row, tokens, otokens));
+        _collector.emit(tuple,new Values(row, tokens, otokens));
 
 
     }

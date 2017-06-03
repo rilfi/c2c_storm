@@ -68,6 +68,7 @@ public class file_rich_Bolt extends BaseRichBolt {
                 writer.write(tLine);
                 writer.newLine();
                 writer.flush();
+                _collector.ack(tuple);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -78,6 +79,7 @@ public class file_rich_Bolt extends BaseRichBolt {
                 writer1.write(row);
                 writer1.newLine();
                 writer1.flush();
+                _collector.ack(tuple);
             } catch (IOException e) {
                 e.printStackTrace();
             }

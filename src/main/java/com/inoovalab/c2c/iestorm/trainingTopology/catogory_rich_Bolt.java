@@ -58,7 +58,7 @@ public class catogory_rich_Bolt extends BaseRichBolt {
         }
         
 
-        _collector.emit( new Values(row,rangeMap));
+        _collector.emit(tuple, new Values(row,rangeMap));
 
 
 
