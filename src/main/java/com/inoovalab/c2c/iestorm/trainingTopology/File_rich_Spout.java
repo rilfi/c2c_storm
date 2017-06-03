@@ -29,9 +29,9 @@ public class File_rich_Spout extends BaseRichSpout {
     @Override
     public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
         outputCollector = spoutOutputCollector;
-        String titleFile= (String)  map.get("fileName");
+       // String titleFile= (String)  map.get("fileName");
         try {
-            fis = new FileInputStream(titleFile);
+            fis = new FileInputStream("/root/c2c/c2c_storm/c3TitleSet.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
