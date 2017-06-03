@@ -34,7 +34,7 @@ public class File_rich_Spout extends BaseRichSpout {
        // String titleFile= (String)  map.get("fileName");
         linesRead = new AtomicLong(0);
         try {
-            fis = new FileInputStream("/root/c2c/c2c_storm/c3TitleSet.txt");
+            fis = new FileInputStream("/root/c2c/c2c_storm/c3TitleSet1.txt");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
