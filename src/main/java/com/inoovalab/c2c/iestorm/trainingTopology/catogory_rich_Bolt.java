@@ -31,7 +31,7 @@ public class catogory_rich_Bolt extends BaseRichBolt {
     public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector) {
         _collector = outputCollector;
         try {
-            catList = Files.readAllLines(new File("catListSorted1.txt").toPath(), Charset.defaultCharset());
+            catList = Files.readAllLines(new File("/root/c2c/c2c_storm/catListSorted1.txt").toPath(), Charset.defaultCharset());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class catogory_rich_Bolt extends BaseRichBolt {
         row=tuple.getStringByField("row");
 
         for (String brand : catList) {
-            ro=rangeList(brand,"category",tokens,otokens,rangeMap);
+            ro=rangeList(brand,"CAT",tokens,otokens,rangeMap);
             tokens=ro.getwList();
             rangeMap=ro.getRangeMap();
         }

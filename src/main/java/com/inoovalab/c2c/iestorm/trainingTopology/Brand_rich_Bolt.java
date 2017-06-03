@@ -31,7 +31,7 @@ public class Brand_rich_Bolt extends BaseRichBolt {
     public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector) {
         _collector = outputCollector;
         try {
-            brandList = Files.readAllLines(new File("orderedBrandFinal1.txt").toPath(), Charset.defaultCharset());
+            brandList = Files.readAllLines(new File("/root/c2c/c2c_storm/orderedBrandFinal1.txt").toPath(), Charset.defaultCharset());
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -52,7 +52,7 @@ public class Brand_rich_Bolt extends BaseRichBolt {
         Map<Integer,String>rangeMap=new HashMap<>();
         ReturnObject2 ro=new ReturnObject2();
         for (String brand : brandList) {
-            ro=rangeList(brand,"brand",tokens,otokens,rangeMap);
+            ro=rangeList(brand,"BRA",tokens,otokens,rangeMap);
             tokens=ro.getwList();
             rangeMap=ro.getRangeMap();
         }
