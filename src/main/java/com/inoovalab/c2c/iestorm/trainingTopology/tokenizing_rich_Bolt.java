@@ -31,7 +31,7 @@ public class tokenizing_rich_Bolt extends BaseRichBolt {
 
     @Override
     public void execute(Tuple tuple) {
-        String row = (String) tuple.getValue(0);
+        String row =  tuple.getStringByField("row");
         row = row.replaceAll("[\\s\\p{Z}]+", " ").trim();
         String rowLower = row.toLowerCase();
         ArrayList<String> tokens = new ArrayList<>(Arrays.asList(rowLower.split(" ")));

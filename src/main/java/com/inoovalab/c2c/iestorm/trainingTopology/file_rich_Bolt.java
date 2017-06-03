@@ -34,11 +34,11 @@ public class file_rich_Bolt extends BaseRichBolt {
     @Override
     public void prepare(Map map, TopologyContext topologyContext, OutputCollector outputCollector) {
         _collector = outputCollector;
-        String trainingfile= (String) map.get("trainingFile");
-        String testfile=(String)map.get("testFile");
+/*        String trainingfile= (String) map.get("trainingFile");
+        String testfile=(String)map.get("testFile");*/
         try {
-            writer = new BufferedWriter(new FileWriter(trainingfile));
-            writer1 = new BufferedWriter(new FileWriter(testfile));
+            writer = new BufferedWriter(new FileWriter("/root/c2c/c2c_storm/MITrainingData7.txt"));
+            writer1 = new BufferedWriter(new FileWriter("/root/c2c/c2c_storm/MITestData7.txt"));
         } catch (IOException e) {
             e.printStackTrace();
         }
