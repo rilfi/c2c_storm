@@ -3,9 +3,11 @@ package com.inoovalab.c2c.iestorm.trainingTopology;
 
 import org.apache.storm.Config;
 import org.apache.storm.LocalCluster;
+import org.apache.storm.StormSubmitter;
 import org.apache.storm.generated.AlreadyAliveException;
 import org.apache.storm.generated.AuthorizationException;
 import org.apache.storm.generated.InvalidTopologyException;
+import org.apache.storm.generated.StormTopology;
 import org.apache.storm.topology.TopologyBuilder;
 import org.apache.storm.utils.Utils;
 
@@ -30,12 +32,15 @@ public class TrainingTopologyRunner_rich {
     config.put("trainingFile","MITrainingData7.txt");
     config.put("testFile","MITestData7.txt");
     //StormSubmitter.submitTopologyWithProgressBar("training",config,builder.createTopology());
+    StormTopology topology = builder.createTopology();
+    StormSubmitter.submitTopology("training-rich_topology", config, topology);
 
-    LocalCluster localCluster = new LocalCluster();
+
+/*    LocalCluster localCluster = new LocalCluster();
     localCluster.submitTopology("training-rich_topology", config, builder.createTopology());
 
     Utils.sleep(10000);
     localCluster.killTopology("training-rich_topology");
-    localCluster.shutdown();
+    localCluster.shutdown();*/
   }
 }
