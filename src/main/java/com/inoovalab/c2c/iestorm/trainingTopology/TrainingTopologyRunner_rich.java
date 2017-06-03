@@ -18,9 +18,9 @@ public class TrainingTopologyRunner_rich {
 
     builder.setSpout("File_rich_Spout", new File_rich_Spout(), 1);
 
-    builder.setBolt("tokenizing_rich_Bolt", new tokenizing_rich_Bolt(), 10).shuffleGrouping("File_rich_Spout");
-    builder.setBolt("Brand_rich_Bolt", new Brand_rich_Bolt(), 15).shuffleGrouping("tokenizing_rich_Bolt");
-    builder.setBolt("catogory_rich_Bolt", new catogory_rich_Bolt(), 15).shuffleGrouping("Brand_rich_Bolt");
+    builder.setBolt("tokenizing_rich_Bolt", new tokenizing_rich_Bolt(), 1).shuffleGrouping("File_rich_Spout");
+    builder.setBolt("Brand_rich_Bolt", new Brand_rich_Bolt(), 1).shuffleGrouping("tokenizing_rich_Bolt");
+    builder.setBolt("catogory_rich_Bolt", new catogory_rich_Bolt(), 1).shuffleGrouping("Brand_rich_Bolt");
     builder.setBolt("file_rich_Bolt", new file_rich_Bolt(), 1).shuffleGrouping("catogory_rich_Bolt");
 
     Config config = new Config();
