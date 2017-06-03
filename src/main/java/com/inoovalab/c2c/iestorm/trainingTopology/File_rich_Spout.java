@@ -1,0 +1,91 @@
+package com.inoovalab.c2c.iestorm.trainingTopology;
+
+
+import java.io.*;
+import java.nio.charset.StandardCharsets;
+import java.util.*;
+
+import com.inoovalab.c2c.iestorm.TweetEvent;
+import com.inoovalab.c2c.iestorm.basic_topology.Simulated_Tweet_Spout;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+import org.apache.storm.spout.SpoutOutputCollector;
+import org.apache.storm.task.TopologyContext;
+import org.apache.storm.topology.OutputFieldsDeclarer;
+import org.apache.storm.topology.base.BaseRichSpout;
+import org.apache.storm.tuple.Fields;
+import org.apache.storm.tuple.Values;
+import org.apache.storm.utils.Utils;
+
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Map;
+
+/**
+ * Created by rilfi on 3/19/2017.
+ */
+public class File_rich_Spout extends BaseRichSpout {
+    private static final Logger LOGGER = LogManager.getLogger(File_rich_Spout.class);
+
+    private SpoutOutputCollector outputCollector;
+    FileInputStream fis;
+    InputStreamReader isr;
+    BufferedReader br;
+
+
+    @Override
+    public void open(Map map, TopologyContext topologyContext, SpoutOutputCollector spoutOutputCollector) {
+        outputCollector = spoutOutputCollector;
+        String titleFile= (String)  map.get("fileName");
+        try {
+            fis = new FileInputStream(titleFile);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        isr = new InputStreamReader(fis);
+        br = new BufferedReader(isr);
+
+
+    }
+
+    @Override
+    public void nextTuple() {
+        String row = null;
+        try {
+            if ((row = br.readLine()) != null) {
+                outputCollector.emit(new Values(row));
+                Utils.sleep(1);
+
+
+            }
+            else {
+                br.close();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+
+
+    }
+
+    @Override
+    public void ack(Object msgId) {
+        LOGGER.debug("Got ACK for msgId : " + msgId);
+    }
+
+    @Override
+    public void fail(Object msgId) {
+        LOGGER.debug("Got FAIL for msgId : " + msgId);
+    }
+
+
+    @Override
+    public void declareOutputFields(OutputFieldsDeclarer outputFieldsDeclarer) {
+        outputFieldsDeclarer.declare(new Fields("row"));
+
+    }
+
+}
